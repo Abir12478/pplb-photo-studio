@@ -1,0 +1,27 @@
+<!-- PPLB Photo Studio -->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPLB Photo Studio</title>
+<style>
+body{margin:0;background:#0b211a;color:white;font-family:Arial,sans-serif;text-align:center;padding:20px}h1{color:#27c995}input{display:block;margin:15px auto;padding:12px;max-width:90%}canvas{width:100%;max-width:650px;background:#104333}button{padding:12px 20px;background:#27c995;border:0;border-radius:8px;font-weight:bold;margin:8px}
+</style>
+</head>
+<body>
+<h1>🌿 PPLB PHOTO STUDIO</h1>
+<p>প্রকৃতির পথে Low Budget</p>
+<input type="file" id="photo" accept="image/*">
+<input id="place" value="বালাশী ঘাট" placeholder="ভ্রমণস্থানের নাম">
+<input id="number" value="১৫" placeholder="সিরিয়াল নম্বর">
+<canvas id="art" width="1080" height="1080"></canvas><br>
+<button onclick="draw()">Preview</button>
+<button onclick="download()">PNG Download</button>
+<script>
+let img=null;const c=document.getElementById('art'),x=c.getContext('2d');
+document.getElementById('photo').onchange=e=>{let f=e.target.files[0];if(!f)return;img=new Image();img.onload=draw;img.src=URL.createObjectURL(f)};
+function draw(){x.fillStyle='#104333';x.fillRect(0,0,1080,1080);if(img){let r=Math.max(980/img.width,840/img.height);let w=img.width*r,h=img.height*r;x.drawImage(img,(1080-w)/2,50+(840-h)/2,w,h)}else{x.fillStyle='#d8ded9';x.fillRect(50,50,980,840);x.fillStyle='#104333';x.font='bold 42px sans-serif';x.fillText('আপনার ছবি আপলোড করুন',280,470)}x.fillStyle='white';x.font='bold 62px sans-serif';x.fillText(document.getElementById('place').value,50,965);x.font='bold 28px sans-serif';x.fillText(document.getElementById('number').value,50,1015);x.textAlign='right';x.fillStyle='#27c995';x.font='bold 40px sans-serif';x.fillText('🌿 PPLB',1030,965);x.fillStyle='#c2d4cb';x.font='bold 24px sans-serif';x.fillText('প্রকৃতির পথে Low Budget',1030,1015);x.textAlign='left'}
+function download(){draw();let a=document.createElement('a');a.download='PPLB-Travel.png';a.href=c.toDataURL('image/png');a.click()}draw();
+</script>
+</body></html>
