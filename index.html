@@ -1,27 +1,135 @@
-<!-- PPLB Photo Studio -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PPLB Photo Studio</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PPLB Photo Studio — Premium Travel Designer</title>
 <style>
-body{margin:0;background:#0b211a;color:white;font-family:Arial,sans-serif;text-align:center;padding:20px}h1{color:#27c995}input{display:block;margin:15px auto;padding:12px;max-width:90%}canvas{width:100%;max-width:650px;background:#104333}button{padding:12px 20px;background:#27c995;border:0;border-radius:8px;font-weight:bold;margin:8px}
-</style>
-</head>
+:root{--bg:#071b16;--panel:#102820;--line:#29483d;--muted:#a9bdb4;--green:#27c995;--white:#f7faf8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--white);font-family:system-ui,"Noto Sans Bengali",Arial,sans-serif}
+header{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:#0a211a}
+.logo{font-weight:950;font-size:22px;color:var(--green)}.logo small{display:block;color:var(--muted);font-size:11px;font-weight:500}
+main{max-width:1450px;margin:auto;padding:16px;display:grid;grid-template-columns:340px minmax(0,1fr);gap:16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px}
+h2{font-size:17px;margin:0 0 12px}.sub{font-size:12px;color:var(--muted);line-height:1.6}
+label{display:block;font-size:12px;color:var(--muted);margin:11px 0 5px}
+input,select{width:100%;padding:10px;border-radius:9px;border:1px solid var(--line);background:#081d16;color:white;font:inherit}
+input[type=color]{height:40px;padding:3px}input[type=range]{padding:0;accent-color:var(--green)}
+button{border:0;border-radius:9px;padding:10px 13px;background:var(--green);color:#062016;font-weight:800;cursor:pointer}
+button.alt{background:#1a3a2e;color:white;border:1px solid var(--line)}
+.row{display:flex;gap:8px;align-items:center}.row>*{flex:1;min-width:0}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.previewcol{min-width:0}.canvaswrap{background:#0b211a;border:1px solid var(--line);border-radius:15px;padding:10px;display:flex;justify-content:center}
+canvas{display:block;width:min(100%,760px);height:auto;background:#104333}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 10px}
+.filters{display:flex;gap:7px;overflow:auto;padding:2px 0 9px}
+.chip{white-space:nowrap;background:#17372c;color:#dcebe3;border:1px solid var(--line);font-size:12px;padding:8px 11px}
+.chip.active{background:var(--green);color:#062016;border-color:var(--green)}
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.design{background:#102820;border:1px solid var(--line);border-radius:11px;padding:7px;color:white;text-align:left;min-width:0}
+.design.active{border:2px solid var(--green);padding:6px}
+.thumb{aspect-ratio:1.2;border-radius:7px;overflow:hidden;position:relative;margin-bottom:7px}
+.thumb .photo{position:absolute;inset:0;background:linear-gradient(135deg,#577b69,#d2d9d0)}
+.thumb .band{position:absolute;left:0;right:0;bottom:0;height:30%;background:var(--c1);border-top:3px solid var(--c3)}
+.thumb .line{position:absolute;left:8%;top:12%;width:44%;height:4px;background:var(--c3);box-shadow:0 10px 0 var(--c2)}
+.thumb .orb{position:absolute;right:9%;top:10%;width:30%;aspect-ratio:1;border:3px solid var(--c3);border-radius:50%}
+.thumb .tag{position:absolute;bottom:8%;left:8%;font-size:10px;color:var(--c2);font-weight:900}
+.design b{font-size:11px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.design small{font-size:10px;color:var(--muted)}
+.badge{font-size:11px;color:var(--green)}
+@media(max-width:900px){main{grid-template-columns:1fr}.gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:480px){main{padding:10px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.panel{padding:12px}}
+</style></head>
 <body>
-<h1>🌿 PPLB PHOTO STUDIO</h1>
-<p>প্রকৃতির পথে Low Budget</p>
-<input type="file" id="photo" accept="image/*">
-<input id="place" value="বালাশী ঘাট" placeholder="ভ্রমণস্থানের নাম">
-<input id="number" value="১৫" placeholder="সিরিয়াল নম্বর">
-<canvas id="art" width="1080" height="1080"></canvas><br>
-<button onclick="draw()">Preview</button>
-<button onclick="download()">PNG Download</button>
+<header><div class="logo">🌿 PPLB PHOTO STUDIO<small>প্রকৃতির পথে Low Budget · Premium Travel Memories</small></div><span class="badge">1000+ DESIGN STUDIO</span></header>
+<main>
+<aside class="panel">
+<h2>✏️ আপনার ডিজাইন এডিট করুন</h2>
+<label>আপনার ছবি আপলোড</label><input id="file" type="file" accept="image/*">
+<label>ভ্রমণস্থানের নাম</label><input id="place" value="বালাশী ঘাট">
+<div class="row"><div><label>সিরিয়াল</label><input id="serial" value="১৫"></div><div><label>তারিখ</label><input id="date" value="২০২৬"></div></div>
+<label>ছোট ক্যাপশন</label><input id="caption" value="প্রকৃতির পথে Low Budget">
+<div class="row"><div><label>ব্র্যান্ড</label><input id="brand" value="PPLB"></div><div><label>লোগো</label><input id="symbol" value="🌿"></div></div>
+<label>ব্যাকগ্রাউন্ড কালার</label><input id="bg" type="color" value="#103f32">
+<label>লেখার রং</label><input id="fg" type="color" value="#ffffff">
+<label>অ্যাকসেন্ট কালার</label><input id="accent" type="color" value="#27c995">
+<label>ছবির Zoom</label><input id="zoom" type="range" min="100" max="220" value="100">
+<div class="row"><div><label>ছবি বামে/ডানে</label><input id="xpos" type="range" min="0" max="100" value="50"></div><div><label>ছবি উপরে/নিচে</label><input id="ypos" type="range" min="0" max="100" value="50"></div></div>
+<label>ডাউনলোড সাইজ</label><select id="size"><option value="square">Square · 1080 × 1080</option><option value="portrait">Portrait · 1080 × 1350</option><option value="story">Story · 1080 × 1920</option><option value="landscape">Landscape · 1920 × 1080</option></select>
+<div class="actions"><button id="download">⬇ HD PNG Download</button><button class="alt" id="reset">Reset</button></div>
+<p class="sub">ছবি, লেখা, রং ও Zoom বদলালে প্রিভিউ আপডেট হবে। আপনার ছবি সার্ভারে পাঠানো হয় না; এডিট আপনার ব্রাউজারেই হয়।</p>
+</aside>
+<section class="previewcol">
+<div class="toolbar"><h2 style="margin:0">🖼️ Live Design Preview</h2><span class="badge" id="chosen">Design #001</span></div>
+<div class="canvaswrap"><canvas id="cv" width="1080" height="1080"></canvas></div>
+<div class="panel" style="margin-top:14px">
+<div class="toolbar"><div><h2 style="margin:0">✨ Premium Design Library</h2><div class="sub">১২টি লেআউট × ১০টি কালার × ১০টি স্টাইল = ১২০০ কম্বিনেশন</div></div><span class="badge">১২০০ ডিজাইন</span></div>
+<input id="search" placeholder="ডিজাইন খুঁজুন: Cinematic, Nature, Luxury...">
+<div class="filters" id="filters"></div>
+<div class="toolbar"><span class="sub" id="shown">ডিজাইন দেখানো হচ্ছে</span><button class="alt" id="shuffle">🎲 Random Design</button></div>
+<div class="gallery" id="gallery"></div>
+<div class="actions"><button class="alt" id="more">আরও ডিজাইন দেখুন</button></div>
+</div></section></main>
 <script>
-let img=null;const c=document.getElementById('art'),x=c.getContext('2d');
-document.getElementById('photo').onchange=e=>{let f=e.target.files[0];if(!f)return;img=new Image();img.onload=draw;img.src=URL.createObjectURL(f)};
-function draw(){x.fillStyle='#104333';x.fillRect(0,0,1080,1080);if(img){let r=Math.max(980/img.width,840/img.height);let w=img.width*r,h=img.height*r;x.drawImage(img,(1080-w)/2,50+(840-h)/2,w,h)}else{x.fillStyle='#d8ded9';x.fillRect(50,50,980,840);x.fillStyle='#104333';x.font='bold 42px sans-serif';x.fillText('আপনার ছবি আপলোড করুন',280,470)}x.fillStyle='white';x.font='bold 62px sans-serif';x.fillText(document.getElementById('place').value,50,965);x.font='bold 28px sans-serif';x.fillText(document.getElementById('number').value,50,1015);x.textAlign='right';x.fillStyle='#27c995';x.font='bold 40px sans-serif';x.fillText('🌿 PPLB',1030,965);x.fillStyle='#c2d4cb';x.font='bold 24px sans-serif';x.fillText('প্রকৃতির পথে Low Budget',1030,1015);x.textAlign='left'}
-function download(){draw();let a=document.createElement('a');a.download='PPLB-Travel.png';a.href=c.toDataURL('image/png');a.click()}draw();
-</script>
-</body></html>
+const $=id=>document.getElementById(id),cv=$('cv'),ctx=cv.getContext('2d');
+const palettes=[
+['#103f32','#ffffff','#27c995'],['#10243d','#ffffff','#d8b56d'],['#201a35','#fffaff','#c39aff'],['#38251d','#fff8ee','#e5a36d'],['#142d3c','#f4fbff','#78c9e8'],['#292d32','#ffffff','#f0c75e'],['#432735','#fff5fa','#ff91b5'],['#263b2b','#f4fff2','#b8dc8d'],['#e9e4d8','#202b26','#397b62'],['#14284a','#ffffff','#73a7ff']
+];
+const layouts=['Classic PPLB','Cinematic Frame','Luxury Editorial','Nature Journal','Adventure Poster','Minimal Clean','Bold Magazine','Travel Postcard','Modern Split','Film Story','Mountain Mood','Premium Archive'];
+const cats=['All','Classic','Cinematic','Luxury','Nature','Adventure','Minimal','Magazine','Postcard','Modern'];
+const fonts=['Bold','Elegant','Modern','Compact','Editorial','Classic','Rounded','Heavy','Soft','Wide'];
+let designs=Array.from({length:1200},(_,i)=>({id:i+1,layout:i%12,pal:Math.floor(i/12)%10,font:Math.floor(i/120)%10}));
+let active=0,category='All',limit=36,img=null;
+function bn(n){return n.toLocaleString('bn-BD')}
+function draw(){
+ let s=$('size').value,w=1080,h=1080;if(s==='portrait')h=1350;if(s==='story')h=1920;if(s==='landscape')w=1920;
+ cv.width=w;cv.height=h;
+ let bg=$('bg').value,fg=$('fg').value,ac=$('accent').value,L=designs[active].layout;
+ ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
+ let m=w*.045,foot=h*(s==='story'?.19:.18),ix=m,iy=m,iw=w-2*m,ih=h-foot-m;
+ if(s==='landscape'){iw=w*.66;ih=h*.90;iy=h*.05}
+ if(L===8){iw=w*.56;ih=h-foot-m}
+ if(img){
+  let z=+$('zoom').value/100,scale=Math.max(iw/img.width,ih/img.height)*z,sw=iw/scale,sh=ih/scale;
+  let sx=(img.width-sw)*$('xpos').value/100,sy=(img.height-sh)*$('ypos').value/100;
+  ctx.save();ctx.beginPath();ctx.rect(ix,iy,iw,ih);ctx.clip();ctx.drawImage(img,sx,sy,sw,sh,ix,iy,iw,ih);ctx.restore();
+ }else{
+  let g=ctx.createLinearGradient(ix,iy,ix+iw,iy+ih);g.addColorStop(0,'#668c7b');g.addColorStop(1,'#dce1dc');ctx.fillStyle=g;ctx.fillRect(ix,iy,iw,ih);
+  ctx.fillStyle='rgba(0,0,0,.22)';ctx.fillRect(ix,iy,iw,ih);ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='bold 42px sans-serif';ctx.fillText('আপনার ভ্রমণের ছবি আপলোড করুন',ix+iw/2,iy+ih/2);
+ }
+ if([1,9,10].includes(L)){let g=ctx.createLinearGradient(0,iy+ih*.45,0,iy+ih);g.addColorStop(0,'transparent');g.addColorStop(1,'rgba(0,0,0,.65)');ctx.fillStyle=g;ctx.fillRect(ix,iy,iw,ih)}
+ if(L===6){ctx.strokeStyle=ac;ctx.lineWidth=18;ctx.strokeRect(ix+8,iy+8,iw-16,ih-16)}
+ if([2,11].includes(L)){ctx.strokeStyle=ac;ctx.lineWidth=4;ctx.strokeRect(m*.65,m*.65,w-1.3*m,h-1.3*m)}
+ ctx.fillStyle=bg;ctx.fillRect(0,h-foot,w,foot);
+ if(L===8){ctx.fillStyle=bg;ctx.fillRect(ix+iw,h*.05,w-ix-iw,h*.90)}
+ let left=m,ty=h-foot*.55;if(s==='landscape'){left=w*.70;ty=h*.40}
+ if(L===5)ty=h-foot*.48;
+ ctx.textAlign='left';ctx.fillStyle=fg;
+ let title=$('place').value||'ভ্রমণস্থানের নাম',ts=Math.min(72,w*.065);if(s==='landscape')ts=58;
+ ctx.font='900 '+ts+'px sans-serif';ctx.fillText(trim(title,w*.72,ts),left,ty);
+ ctx.font='700 '+ts*.40+'px sans-serif';ctx.globalAlpha=.8;ctx.fillText($('serial').value+'  ·  '+$('date').value,left,ty+ts*.70);ctx.globalAlpha=1;
+ ctx.textAlign='right';ctx.fillStyle=ac;ctx.font='900 '+ts*.43+'px sans-serif';ctx.fillText(($('symbol').value||'🌿')+' '+($('brand').value||'PPLB'),w-m,h-foot*.55);
+ ctx.fillStyle=fg;ctx.globalAlpha=.78;ctx.font='600 '+Math.max(20,ts*.29)+'px sans-serif';ctx.fillText(trim($('caption').value,w*.62,ts*.29),w-m,h-foot*.24);ctx.globalAlpha=1;
+ if([2,3,7,11].includes(L)){ctx.strokeStyle=ac;ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(m,h-foot+12);ctx.lineTo(w-m,h-foot+12);ctx.stroke()}
+ $('chosen').textContent='Design #'+String(designs[active].id).padStart(3,'0');
+}
+function trim(t,max,font){ctx.font='900 '+font+'px sans-serif';while(ctx.measureText(t).width>max&&t.length>3)t=t.slice(0,-2)+'…';return t}
+function renderFilters(){let f=$('filters');f.innerHTML='';cats.forEach(c=>{let b=document.createElement('button');b.className='chip'+(c===category?' active':'');b.textContent=c;b.onclick=()=>{category=c;limit=36;renderFilters();renderGallery()};f.appendChild(b)})}
+function renderGallery(){
+ let term=$('search').value.toLowerCase();
+ let list=designs.filter(d=>(category==='All'||layouts[d.layout].toLowerCase().includes(category.toLowerCase()))&&(`${layouts[d.layout]} ${fonts[d.font]} ${d.id}`).toLowerCase().includes(term));
+ $('shown').textContent=bn(Math.min(limit,list.length))+' / '+bn(list.length)+' ডিজাইন';
+ let g=$('gallery');g.innerHTML='';
+ list.slice(0,limit).forEach(d=>{
+  let p=palettes[d.pal],b=document.createElement('button');b.className='design'+(designs[active].id===d.id?' active':'');
+  b.innerHTML=`<div class="thumb" style="--c1:${p[0]};--c2:${p[1]};--c3:${p[2]}"><div class="photo"></div><div class="line"></div><div class="orb"></div><div class="band"></div><div class="tag">PPLB · TRAVEL</div></div><b>${layouts[d.layout]}</b><small>#${String(d.id).padStart(3,'0')} · ${fonts[d.font]}</small>`;
+  b.onclick=()=>{active=d.id-1;$('bg').value=p[0];$('fg').value=p[1];$('accent').value=p[2];draw();renderGallery()};g.appendChild(b)
+ });
+}
+$('file').onchange=e=>{let f=e.target.files[0];if(!f)return;let im=new Image();im.onload=()=>{img=im;draw()};im.src=URL.createObjectURL(f)};
+['place','serial','date','caption','brand','symbol','bg','fg','accent','zoom','xpos','ypos','size'].forEach(id=>$(id).addEventListener('input',draw));
+$('search').oninput=()=>{limit=36;renderGallery()};
+$('more').onclick=()=>{limit+=36;renderGallery()};
+$('shuffle').onclick=()=>{active=Math.floor(Math.random()*designs.length);let p=palettes[designs[active].pal];$('bg').value=p[0];$('fg').value=p[1];$('accent').value=p[2];draw();renderGallery()};
+$('download').onclick=()=>{draw();let a=document.createElement('a');a.download='PPLB-Premium-Travel-Design.png';a.href=cv.toDataURL('image/png');a.click()};
+$('reset').onclick=()=>{['place','serial','date','caption','brand','symbol'].forEach((id,i)=>$(id).value=['বালাশী ঘাট','১৫','২০২৬','প্রকৃতির পথে Low Budget','PPLB','🌿'][i]);$('bg').value='#103f32';$('fg').value='#ffffff';$('accent').value='#27c995';$('zoom').value=100;$('xpos').value=50;$('ypos').value=50;$('size').value='square';draw()};
+renderFilters();renderGallery();draw();
+</script></body></html>
