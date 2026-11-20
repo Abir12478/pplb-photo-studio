@@ -4,524 +4,720 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PPLB PHOTO STUDIO</title>
+<meta name="theme-color" content="#09251b">
+<title>PPLB PHOTO STUDIO | Premium Editor</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#071b15;color:#fff;font-family:Arial,sans-serif}
-header{background:#103c2d;padding:20px 12px;text-align:center;border-bottom:2px solid #25d49a}
-.brand{font-size:30px;font-weight:900;color:#28d49a;letter-spacing:1px}
-.tag{margin:8px;color:#d4e5dc}
-a{color:#28d49a;text-decoration:none}
-main{max-width:1050px;margin:auto;padding:12px}
-.card{background:#10291f;border:1px solid #315342;border-radius:14px;padding:15px;margin-bottom:14px}
-h2{font-size:18px;margin-top:0;color:#35d9a0}
-label{display:block;font-size:13px;color:#c7d9cf;margin:12px 0 6px}
-input,select{width:100%;padding:11px;border-radius:8px;border:1px solid #496656;background:#071b15;color:white}
-input[type=color]{height:42px;padding:3px}
-input[type=range]{padding:0}
-button{border:0;border-radius:9px;background:#27c995;color:#05251b;font-weight:bold;padding:12px;cursor:pointer}
-button.secondary{background:#294b3c;color:white}
-button:active{transform:scale(.98)}
+body{margin:0;background:#081b14;color:#f4fff8;font-family:Arial,sans-serif}
+header{background:linear-gradient(135deg,#103e2d,#071b14);padding:24px 12px;text-align:center;border-bottom:1px solid #286a4d}
+.logo{font-size:clamp(24px,6vw,38px);font-weight:900;color:#29d69d}
+.tag{color:#c7dfd2;margin-top:8px}
+.container{max-width:1050px;margin:auto;padding:12px}
+.card{background:#10291f;border:1px solid #254d3a;border-radius:16px;padding:16px;margin-bottom:14px}
+h2{font-size:17px;color:#39d9a3;margin:0 0 14px}
+label{display:block;color:#bdd2c5;font-size:13px;margin:12px 0 6px}
+input,select{width:100%;padding:11px;border:1px solid #365d48;border-radius:9px;background:#071b14;color:white}
+input[type=range]{padding:0;accent-color:#29d69d}
+input[type=color]{height:43px;padding:3px}
+button{border:0;border-radius:9px;padding:12px;background:#28ce96;color:#05261b;font-weight:bold;cursor:pointer}
+button:active{transform:scale(.97)}
+.secondary{background:#294b3b;color:#fff}
+.danger{background:#59372f;color:#fff}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.row{display:flex;gap:10px}
+.row{display:flex;gap:9px}
 .row>*{flex:1;min-width:0}
-canvas{width:100%;height:auto;display:block;background:#104333;border-radius:5px}
-.preview{padding:8px;background:#061710;border-radius:10px}
 .tools{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.template{background:#1c3a2d;color:white;border:2px solid transparent;padding:5px;text-align:left;border-radius:9px;min-width:0}
-.template.active{border-color:#27d995}
-.thumb{height:85px;position:relative;overflow:hidden;border-radius:5px}
-.thumb img{width:100%;height:100%;object-fit:cover}
-.template b{font-size:11px;display:block;margin-top:6px}
-small{color:#b7cbbf}
-footer{text-align:center;padding:22px;color:#a8c2b4}
-@media(min-width:650px){.gallery{grid-template-columns:repeat(5,1fr)}.tools{grid-template-columns:repeat(4,1fr)}}
+.canvas-wrap{background:#061710;padding:8px;border-radius:12px}
+canvas{width:100%;height:auto;display:block;border-radius:4px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.design{padding:6px;background:#193a2b;color:white;text-align:left;border:2px solid transparent;border-radius:10px}
+.design.active{border-color:#29d69d}
+.design canvas{border-radius:5px}
+.design strong{display:block;font-size:12px;margin:6px 2px}
+.design small{color:#b5d1c1}
+.badge{background:#174a35;color:#4ee6ad;padding:5px 9px;border-radius:20px;font-size:11px}
+.full{width:100%}
+.notice{font-size:12px;line-height:1.7;color:#b6cbbd}
+footer{text-align:center;padding:25px;color:#b3cdbd}
+footer a{color:#39d9a3;text-decoration:none}
+@media(min-width:650px){
+.gallery{grid-template-columns:repeat(4,1fr)}
+.tools{grid-template-columns:repeat(4,1fr)}
+.grid{grid-template-columns:repeat(3,1fr)}
+}
 </style>
 </head>
 <body>
 
 <header>
-<div class="brand">🌿 PPLB PHOTO STUDIO</div>
+<div class="logo">🌿 PPLB PHOTO STUDIO</div>
 <div class="tag">প্রকৃতির পথে Low Budget</div>
-<div style="font-size:12px">PREMIUM TRAVEL PHOTO EDITOR</div>
+<p style="font-size:11px;color:#9cc7b0">PREMIUM TRAVEL PHOTO EDITOR</p>
 </header>
 
-<main>
+<div class="container">
 
 <section class="card">
-<h2>📸 01. Photo Upload</h2>
+<h2>📸 01 — Upload Your Photo</h2>
 <label>আপনার ছবি নির্বাচন করুন</label>
 <input type="file" id="photo" accept="image/*">
+
 <label>ভ্রমণস্থানের নাম</label>
 <input id="place" value="স্বপ্নপুরী">
+
 <div class="row">
-<div><label>সিরিয়াল</label><input id="serial" value="১৫"></div>
-<div><label>সাল</label><input id="year" value="২০২৬"></div>
+<div>
+<label>সিরিয়াল নম্বর</label>
+<input id="serial" value="১৫">
 </div>
-<label>নিজের ক্যাপশন</label>
-<input id="caption" value="আমাদের ভ্রমণের স্মৃতি">
+<div>
+<label>ভ্রমণের সাল</label>
+<input id="year" value="২০২৬">
+</div>
+</div>
+
+<label>অতিরিক্ত ক্যাপশন</label>
+<input id="caption" value="প্রকৃতির মাঝে কিছু সুন্দর মুহূর্ত">
 </section>
 
 <section class="card">
-<h2>🎨 02. Design Settings</h2>
+<h2>🎨 02 — Premium Design Collection</h2>
 <div class="row">
-<div><label>Background</label><input type="color" id="bg" value="#104333"></div>
-<div><label>Text Color</label><input type="color" id="fg" value="#ffffff"></div>
-<div><label>Border Color</label><input type="color" id="border" value="#27d995"></div>
+<span class="badge">২৪টি আলাদা Layout</span>
+<span class="badge">১২০০+ Combinations</span>
 </div>
-<label>Border Thickness</label>
-<input type="range" id="borderSize" min="0" max="35" value="5">
+<label>ডিজাইন ক্যাটাগরি</label>
+<select id="category">
+<option value="all">All Designs</option>
+<option value="classic">Classic</option>
+<option value="luxury">Luxury</option>
+<option value="cinematic">Cinematic</option>
+<option value="nature">Nature</option>
+<option value="modern">Modern</option>
+<option value="vintage">Vintage</option>
+</select>
+<label>ডিজাইন খুঁজুন</label>
+<input id="search" placeholder="যেমন: Luxury, Nature, Classic...">
+<div class="gallery" id="gallery" style="margin-top:12px"></div>
+</section>
+
+<section class="card">
+<h2>🖌️ 03 — Professional Photo Editing</h2>
 <label>Photo Zoom</label>
-<input type="range" id="zoom" min="100" max="250" value="100">
-<label>Photo Brightness</label>
-<input type="range" id="brightness" min="50" max="150" value="100">
+<input type="range" id="zoom" min="50" max="250" value="100">
+
+<label>Horizontal Position</label>
+<input type="range" id="posX" min="-100" max="100" value="0">
+
+<label>Vertical Position</label>
+<input type="range" id="posY" min="-100" max="100" value="0">
+
+<label>Brightness</label>
+<input type="range" id="brightness" min="40" max="180" value="100">
+
 <label>Contrast</label>
-<input type="range" id="contrast" min="50" max="200" value="100">
+<input type="range" id="contrast" min="40" max="200" value="100">
+
 <label>Saturation</label>
 <input type="range" id="saturation" min="0" max="200" value="100">
-</section>
 
-<section class="card">
-<h2>🛠️ 03. Photo Tools</h2>
-<div class="tools">
+<label>Photo Filter</label>
+<select id="filter">
+<option value="none">Original</option>
+<option value="sepia(0.45)">Vintage</option>
+<option value="grayscale(1)">Black & White</option>
+<option value="saturate(1.6)">Vibrant</option>
+<option value="contrast(1.2) saturate(1.2)">Cinematic</option>
+<option value="sepia(.2) saturate(1.4)">Warm</option>
+<option value="saturate(.7) brightness(1.1)">Soft</option>
+</select>
+
+<div class="tools" style="margin-top:14px">
 <button onclick="rotate(-90)">↶ Rotate Left</button>
 <button onclick="rotate(90)">↷ Rotate Right</button>
-<button onclick="flip()">↔ Flip Photo</button>
+<button onclick="flip()">↔ Flip</button>
 <button class="secondary" onclick="resetPhoto()">Reset Photo</button>
-<button class="secondary" onclick="undo()">↩ Undo</button>
-<button class="secondary" onclick="redo()">↪ Redo</button>
+</div>
+</section>
+
+<section class="card">
+<h2>✨ 04 — Frame & Decoration</h2>
+<div class="row">
+<div>
+<label>Frame Color</label>
+<input type="color" id="frameColor" value="#27d995">
+</div>
+<div>
+<label>Background Color</label>
+<input type="color" id="bg" value="#104333">
+</div>
+<div>
+<label>Text Color</label>
+<input type="color" id="fg" value="#ffffff">
+</div>
+</div>
+<label>Frame Thickness</label>
+<input type="range" id="frame" min="0" max="30" value="5">
+
+<label>Extra Text</label>
+<input id="extraText" placeholder="নিজের লেখা যোগ করুন">
+
+<div class="row">
+<div>
+<label>Text Color</label>
+<input type="color" id="extraColor" value="#ffffff">
+</div>
+<div>
+<label>Text Size</label>
+<input type="range" id="extraSize" min="20" max="100" value="40">
+</div>
+</div>
+
+<button class="full" style="margin-top:12px" onclick="addText()">+ Add Text</button>
+
+<div class="tools" style="margin-top:12px">
 <button onclick="addSticker('📍')">📍 Location</button>
 <button onclick="addSticker('❤️')">❤️ Heart</button>
+<button onclick="addSticker('✈️')">✈️ Travel</button>
+<button onclick="addSticker('🌿')">🌿 Nature</button>
 </div>
-<label>অতিরিক্ত লেখা</label>
-<input id="extraText" placeholder="এখানে নিজের লেখা লিখুন">
-<label>অতিরিক্ত লেখার রং</label>
-<input type="color" id="extraColor" value="#ffffff">
-<label>অতিরিক্ত লেখার আকার</label>
-<input type="range" id="extraSize" min="20" max="100" value="40">
-<button style="width:100%;margin-top:10px" onclick="addText()">+ Add Text</button>
+<p class="notice">নিজের যোগ করা লেখা ও স্টিকার সরাতে Undo ব্যবহার করো।</p>
 </section>
 
 <section class="card">
-<h2>🖼️ 04. Live Photo Preview</h2>
-<div class="preview">
-<canvas id="canvas" width="1080" height="1080"></canvas>
+<h2>🖼️ 05 — Live Preview</h2>
+<div class="canvas-wrap">
+<canvas id="art" width="1080" height="1080"></canvas>
 </div>
-<div class="tools" style="margin-top:12px">
-<button onclick="download('png')">PNG Download</button>
-<button onclick="download('jpeg')">JPG Download</button>
-<button class="secondary" onclick="saveProject()">Save Project</button>
-<button class="secondary" onclick="loadProject()">Load Project</button>
+<p class="notice">Preview-তে যোগ করা লেখা বা স্টিকার স্পর্শ করে টেনে স্থান পরিবর্তন করতে পারবে।</p>
+<div class="tools">
+<button onclick="download('image/png','png')">PNG Download</button>
+<button onclick="download('image/jpeg','jpg')">JPG Download</button>
+<button class="secondary" onclick="undo()">↩ Undo</button>
+<button class="secondary" onclick="redo()">↪ Redo</button>
+<button class="secondary" onclick="save()">💾 Save Project</button>
+<button class="secondary" onclick="load()">📂 Load Project</button>
 </div>
 </section>
 
 <section class="card">
-<h2>✨ 05. 1200+ Design Collection</h2>
-<p style="font-size:12px;color:#bdd2c5">
-১২টি আলাদা লেআউট × ১০টি কালার × ১০টি টাইপোগ্রাফি স্টাইল = ১২০০ ডিজাইন ভ্যারিয়েশন।
-</p>
-<input id="search" placeholder="ডিজাইন খুঁজুন...">
-<div class="gallery" id="gallery" style="margin-top:12px"></div>
-<button style="width:100%;margin-top:12px" onclick="more()">আরও ডিজাইন দেখুন</button>
-</section>
-
-<section class="card">
-<h2>🌿 Official PPLB Website</h2>
-<p>আমাদের ভ্রমণ, স্মৃতি ও বাংলাদেশকে জানুন।</p>
-<a href="https://tour-pplb.lovable.app" target="_blank" rel="noopener">
-🌐 Visit Official Website ↗
+<h2>🌐 Official PPLB Website</h2>
+<p>আমাদের ভ্রমণ ও স্মৃতির ঠিকানা।</p>
+<a href="https://tour-pplb.lovable.app" target="_blank" rel="noopener" style="color:#39d9a3;font-weight:bold">
+🌿 Visit PPLB Official Website ↗
 </a>
 </section>
 
-</main>
+</div>
 
 <footer>
-<div style="font-size:22px;color:#29d49b;font-weight:bold">🌿 PPLB</div>
-<div>প্রকৃতির পথে Low Budget</div>
-<div style="margin-top:10px">
+<div class="logo">🌿 PPLB</div>
+<p>প্রকৃতির পথে Low Budget</p>
 <a href="https://tour-pplb.lovable.app" target="_blank" rel="noopener">
 tour-pplb.lovable.app
 </a>
-</div>
-<div style="font-size:11px;margin-top:12px">© PPLB PHOTO STUDIO · All Rights Reserved</div>
+<p style="font-size:11px">© PPLB PHOTO STUDIO · All Rights Reserved</p>
 </footer>
 
 <script>
-/* PERMANENT BRAND SETTINGS */
+/* FIXED BRAND IDENTITY */
 const BRAND=Object.freeze({
- name:"PPLB",
- tagline:"প্রকৃতির পথে Low Budget",
- website:"https://tour-pplb.lovable.app",
- logo:"🌿"
+name:"PPLB",
+tagline:"প্রকৃতির পথে Low Budget",
+website:"https://tour-pplb.lovable.app"
 });
 
 const $=id=>document.getElementById(id);
-const canvas=$('canvas');
-const ctx=canvas.getContext('2d');
+const c=$('art'),ctx=c.getContext('2d');
 
-const layouts=[
-"Classic","Cinematic","Luxury Editorial","Split Screen",
-"Polaroid","Vintage Postcard","Magazine Cover",
-"Minimal","Circle Portrait","Side Panel",
-"Photo Collage","Film Frame"
-];
+let img=null,angle=0,flipped=false;
+let objects=[],history=[],future=[];
+let selected=0,page=0;
+let dragging=-1;
 
 const palettes=[
-["#104333","#ffffff","#27d995"],
-["#101820","#ffffff","#d8b56d"],
-["#201a35","#ffffff","#c39aff"],
-["#38251d","#fff8ee","#e5a36d"],
-["#142d3c","#ffffff","#78c9e8"],
-["#292d32","#ffffff","#f0c75e"],
-["#432735","#fff5fa","#ff91b5"],
-["#263b2b","#ffffff","#b8dc8d"],
-["#e9e4d8","#202b26","#397b62"],
-["#14284a","#ffffff","#73a7ff"]
+['#103e2d','#ffffff','#29d69d'],
+['#101820','#ffffff','#d5b46a'],
+['#251a35','#ffffff','#c5a0ff'],
+['#eae5d9','#202820','#4c8064'],
+['#162d40','#ffffff','#83c8ec'],
+['#38251d','#fff5e8','#e8ad70'],
+['#392536','#fff5fa','#ff9ec0'],
+['#253b2b','#ffffff','#c2e48f'],
+['#22252c','#ffffff','#f0c85b'],
+['#173c49','#ffffff','#67e0d1']
 ];
 
-let photo=null;
-let angle=0,flipped=false;
-let stickers=[];
-let texts=[];
-let selected=0;
-let pageSize=50;
+/* 24 GENUINELY DIFFERENT COMPOSITIONS */
+const designs=[
+{name:'Classic PPLB',cat:'classic',p:[50,50,980,800],mode:0},
+{name:'Luxury Editorial',cat:'luxury',p:[385,60,645,960],mode:1},
+{name:'Cinematic Poster',cat:'cinematic',p:[0,0,1080,1080],mode:2},
+{name:'Modern Split',cat:'modern',p:[0,0,650,1080],mode:3},
+{name:'Nature Frame',cat:'nature',p:[80,100,920,760],mode:4},
+{name:'Vintage Postcard',cat:'vintage',p:[70,150,940,700],mode:5},
+{name:'Magazine Cover',cat:'luxury',p:[0,0,1080,1080],mode:6},
+{name:'Minimal White',cat:'modern',p:[80,140,920,700],mode:7},
+{name:'Circle Portrait',cat:'modern',p:[190,70,700,700],mode:8},
+{name:'Vertical Story',cat:'modern',p:[170,0,740,1080],mode:9},
+{name:'Travel Journal',cat:'vintage',p:[90,100,900,650],mode:10},
+{name:'Film Photography',cat:'cinematic',p:[65,100,950,850],mode:11},
+{name:'Royal Gold',cat:'luxury',p:[70,70,940,780],mode:12},
+{name:'Green Border',cat:'nature',p:[35,35,1010,850],mode:13},
+{name:'Photo Card',cat:'classic',p:[100,70,880,780],mode:14},
+{name:'Modern Grid',cat:'modern',p:[55,55,970,680],mode:15},
+{name:'Dark Elegance',cat:'luxury',p:[0,0,1080,800],mode:16},
+{name:'Nature Diary',cat:'nature',p:[80,200,920,650],mode:17},
+{name:'Polaroid',cat:'vintage',p:[110,65,860,780],mode:18},
+{name:'Asymmetric',cat:'modern',p:[300,0,780,1080],mode:19},
+{name:'Cinematic Gold',cat:'cinematic',p:[40,50,1000,820],mode:20},
+{name:'Forest Explorer',cat:'nature',p:[60,80,960,820],mode:21},
+{name:'Travel Passport',cat:'vintage',p:[140,100,800,690],mode:22},
+{name:'Signature Edition',cat:'luxury',p:[55,55,970,850],mode:23}
+];
 
-let history=[],future=[];
-
-const templates=Array.from({length:1200},(_,i)=>({
- id:i+1,
- layout:i%12,
- palette:Math.floor(i/12)%10,
- font:Math.floor(i/120)%10
-}));
-
-function saveHistory(){
- history.push({
- angle,flipped,
- stickers:JSON.parse(JSON.stringify(stickers)),
- texts:JSON.parse(JSON.stringify(texts))
- });
- if(history.length>30)history.shift();
- future=[];
+const names=designs.map(d=>d.name);
+function text(t,x,y,size,color,weight='bold',align='left'){
+ ctx.fillStyle=color;
+ ctx.font=`${weight} ${size}px Arial,sans-serif`;
+ ctx.textAlign=align;
+ ctx.fillText(t,x,y);
+ ctx.textAlign='left';
 }
 
-function undo(){
- if(!history.length)return;
- future.push({angle,flipped,stickers,texts});
- let s=history.pop();
- angle=s.angle;flipped=s.flipped;
- stickers=s.stickers;texts=s.texts;
- draw();
-}
-
-function redo(){
- if(!future.length)return;
- history.push({angle,flipped,stickers,texts});
- let s=future.pop();
- angle=s.angle;flipped=s.flipped;
- stickers=s.stickers;texts=s.texts;
- draw();
-}
-
-$('photo').onchange=e=>{
- const file=e.target.files[0];
- if(!file)return;
- if(!file.type.startsWith('image/'))return alert('ছবি নির্বাচন করুন');
- const img=new Image();
- img.onload=()=>{
- photo=img;angle=0;flipped=false;
- saveHistory();draw();
- };
- img.src=URL.createObjectURL(file);
-};
-
-function rotate(v){saveHistory();angle=(angle+v+360)%360;draw()}
-function flip(){saveHistory();flipped=!flipped;draw()}
-function resetPhoto(){
- saveHistory();angle=0;flipped=false;stickers=[];texts=[];draw();
-}
-
-function addSticker(s){
- saveHistory();stickers.push({value:s,x:540,y:540,size:80});draw();
-}
-
-function addText(){
- const value=$('extraText').value.trim();
- if(!value)return;
- saveHistory();
- texts.push({
- value,
- color:$('extraColor').value,
- size:+$('extraSize').value,
- x:540,y:800
- });
- $('extraText').value='';
- draw();
-}
-
-function drawImage(x,y,w,h){
- if(!photo){
- ctx.fillStyle='#607e6d';
- ctx.fillRect(x,y,w,h);
- ctx.fillStyle='white';
- ctx.font='bold 50px Arial';
- ctx.fillText('UPLOAD YOUR PHOTO',x+40,y+h/2);
+function photo(x,y,w,h,circle=false){
+ if(!img){
+ ctx.fillStyle='#d5dfd9';ctx.fillRect(x,y,w,h);
+ text('UPLOAD YOUR PHOTO',x+w/2,y+h/2,35,'#174735','bold','center');
  return;
  }
-
- let rotated=Math.abs(angle%180)===90;
- let pw=rotated?photo.height:photo.width;
- let ph=rotated?photo.width:photo.height;
- let zoom=+$('zoom').value/100;
- let scale=Math.max(w/pw,h/ph)*zoom;
-
  ctx.save();
- ctx.beginPath();
- ctx.rect(x,y,w,h);
- ctx.clip();
+ if(circle){
+ ctx.beginPath();ctx.ellipse(x+w/2,y+h/2,w/2,h/2,0,0,Math.PI*2);ctx.clip();
+ }else{
+ ctx.beginPath();ctx.rect(x,y,w,h);ctx.clip();
+ }
  ctx.translate(x+w/2,y+h/2);
  ctx.rotate(angle*Math.PI/180);
  ctx.scale(flipped?-1:1,1);
- ctx.filter=
- `brightness(${$('brightness').value}%) contrast(${$('contrast').value}%) saturate(${$('saturation').value}%)`;
- ctx.drawImage(photo,-photo.width*scale/2,-photo.height*scale/2,
- photo.width*scale,photo.height*scale);
+ let rw=img.width,rh=img.height;
+ let sw=Math.abs(angle%180)===90?rh:rw;
+ let sh=Math.abs(angle%180)===90?rw:rh;
+ let z=+$('zoom').value/100;
+ let scale=Math.max(w/sw,h/sh)*z;
+ let ox=+$('posX').value/100*w;
+ let oy=+$('posY').value/100*h;
+ ctx.filter=`brightness(${$('brightness').value}%) contrast(${$('contrast').value}%) saturate(${$('saturation').value}%) ${$('filter').value}`;
+ ctx.drawImage(img,-rw*scale/2+ox,-rh*scale/2+oy,rw*scale,rh*scale);
  ctx.filter='none';
  ctx.restore();
 }
 
-function brand(x,y,color,scale=1){
- ctx.save();
+function brand(color){
+ /* Brand position is not user-editable */
  ctx.fillStyle=color;
- ctx.font=`bold ${40*scale}px Arial`;
- ctx.fillText('🌿 PPLB',x,y);
- ctx.restore();
+ ctx.font='bold 40px Arial';
+ ctx.textAlign='right';
+ ctx.fillText('🌿 PPLB',1025,970);
+ ctx.font='bold 25px Arial';
+ ctx.fillStyle=color;
+ ctx.fillText(BRAND.tagline,1025,1018);
+ ctx.textAlign='left';
 }
 
 function draw(){
- const d=templates[selected];
- const L=d.layout;
- const bg=$('bg').value;
- const fg=$('fg').value;
- const bd=$('border').value;
- const size=+$('borderSize').value;
- const H=+$('height')?.value||1080;
- canvas.width=1080;
- canvas.height=1080;
- ctx.fillStyle=bg;
- ctx.fillRect(0,0,1080,1080);
-
- const place=$('place').value||'ভ্রমণ';
- const year=$('year').value;
- const serial=$('serial').value;
- const caption=$('caption').value;
- const line=(x,y,w,h)=>{
- ctx.fillStyle=bd;ctx.fillRect(x,y,w,h);
- };
-
- if(L===0){
- drawImage(50,50,980,800);
- title(place,55,930,68,fg);
- brand(790,965,fg,.9);
- }
- else if(L===1){
- drawImage(0,0,1080,1080);
- let g=ctx.createLinearGradient(0,600,0,1080);
- g.addColorStop(0,'transparent');
- g.addColorStop(1,'rgba(0,0,0,.9)');
- ctx.fillStyle=g;ctx.fillRect(0,0,1080,1080);
- title(place,60,850,90,'#ffffff');
- brand(65,950,'#ffffff');
- }
- else if(L===2){
- ctx.fillStyle='#e9e4d8';ctx.fillRect(0,0,1080,1080);
- drawImage(390,70,630,940);
- title(place,55,460,62,'#202b26',300);
- ctx.fillStyle='#202b26';ctx.font='30px Arial';
- ctx.fillText('TRAVEL JOURNAL',55,150);
- brand(55,900,'#202b26');
- }
- else if(L===3){
- drawImage(0,0,660,1080);
- title(place,700,460,55,fg,330);
- brand(700,600,fg,.8);
- }
- else if(L===4){
- ctx.fillStyle='#e4ded0';ctx.fillRect(0,0,1080,1080);
- ctx.fillStyle='white';ctx.fillRect(100,50,880,980);
- drawImage(135,85,810,770);
- title(place,150,920,60,'#222222');
- brand(150,980,'#222222',.6);
- }
- else if(L===5){
- ctx.fillStyle='#f0e4ca';ctx.fillRect(0,0,1080,1080);
- ctx.strokeStyle='#8a6b43';ctx.lineWidth=12;
- ctx.strokeRect(30,30,1020,1020);
- ctx.fillStyle='#684b2b';ctx.font='bold 35px Arial';
- ctx.fillText('GREETINGS FROM PPLB',70,105);
- drawImage(75,145,930,720);
- title(place,75,950,65,'#684b2b');
- }
- else if(L===6){
- drawImage(0,0,1080,1080);
- ctx.fillStyle='#0006';ctx.fillRect(0,0,1080,1080);
- ctx.fillStyle='white';ctx.font='bold 40px Arial';
- ctx.fillText('PPLB TRAVEL MAGAZINE',55,100);
- title(place,55,250,100,'white');
- brand(55,990,'white');
- }
- else if(L===7){
- ctx.fillStyle='#f3f0e8';ctx.fillRect(0,0,1080,1080);
- ctx.fillStyle='#243b30';ctx.font='bold 30px Arial';
- ctx.fillText('PPLB — TRAVEL STORIES',70,100);
- drawImage(90,150,900,690);
- title(place,90,950,65,'#243b30');
- }
- else if(L===8){
+ const d=designs[selected];
+ const p=palettes[Math.floor(selected/3)%10];
+ const bg=$('bg').value,fg=$('fg').value,bd=$('frameColor').value;
+ c.width=1080;c.height=1080;
  ctx.fillStyle=bg;ctx.fillRect(0,0,1080,1080);
- ctx.save();ctx.beginPath();ctx.arc(540,450,345,0,Math.PI*2);ctx.clip();
- drawImage(195,105,690,690);
- ctx.restore();
- ctx.strokeStyle=bd;ctx.lineWidth=12;
- ctx.beginPath();ctx.arc(540,450,350,0,Math.PI*2);ctx.stroke();
- title(place,150,900,75,fg);
- brand(390,985,fg);
- }
- else if(L===9){
- drawImage(260,0,820,1080);
- ctx.fillStyle=bg;ctx.fillRect(0,0,260,1080);
- ctx.save();ctx.translate(130,700);ctx.rotate(-Math.PI/2);
- ctx.fillStyle=fg;ctx.font='bold 60px Arial';
- ctx.textAlign='center';ctx.fillText(place,0,0);ctx.restore();
- brand(30,980,fg,.65);
- }
- else if(L===10){
- drawImage(0,0,1080,680);
- ctx.fillStyle=bg;ctx.fillRect(0,680,1080,400);
- title(place,50,850,75,fg);
- brand(55,980,fg);
- }
- else{
- ctx.fillStyle='#151515';ctx.fillRect(0,0,1080,1080);
- drawImage(65,100,950,880);
- for(let i=0;i<11;i++){
- ctx.fillStyle='white';
- ctx.fillRect(10+i*100,25,50,35);
- ctx.fillRect(10+i*100,1020,50,35);
- }
- title(place,85,170,55,'white');
- brand(85,980,'white');
- }
 
- if(size>0&&L!==5) {
- if(size>0){ctx.strokeStyle=bd;ctx.lineWidth=size;
- ctx.strokeRect(size/2,size/2,1080-size,1080-size)}
- }
-
- ctx.fillStyle=fg;
- ctx.font='bold 27px Arial';
- ctx.fillText(serial+' · '+year,55,1035);
-
- ctx.fillStyle=fg;
- ctx.font='24px Arial';
- ctx.fillText(BRAND.tagline,55,1065);
-
- // Permanent PPLB branding
- ctx.fillStyle=fg;
- ctx.font='bold 23px Arial';
- ctx.textAlign='right';
- ctx.fillText('PPLB',1030,1035);
- ctx.textAlign='left';
-
- texts.forEach(t=>{
- ctx.fillStyle=t.color;
- ctx.font=`bold ${t.size}px Arial`;
- ctx.fillText(t.value,t.x,t.y);
- });
- stickers.forEach(s=>{
- ctx.font=`${s.size}px Arial`;
- ctx.fillText(s.value,s.x,s.y);
- });
-
-}
-
-function title(t,x,y,s,color,max=900){
- ctx.fillStyle=color;
- ctx.font=`bold ${s}px Arial`;
- while(ctx.measureText(t).width>max&&s>18){
- s-=2;ctx.font=`bold ${s}px Arial`;
- }
- ctx.fillText(t,x,y);
-}
-
-function download(type){
- draw();
- const a=document.createElement('a');
- a.download='PPLB-TRAVEL-'+Date.now()+'.'+type;
- a.href=canvas.toDataURL(type==='png'?'image/png':'image/jpeg',.95);
- a.click();
-}
-
-function saveProject(){
- try{
- const project={
- place:$('place').value,
- serial:$('serial').value,
- year:$('year').value,
- caption:$('caption').value,
- bg:$('bg').value,fg:$('fg').value,
- border:$('border').value,
- selected
+ const [x,y,w,h]=d.p;
+ const mode=d.mode;
+ const place=$('place').value||'ভ্রমণ';
+ const serial=$('serial').value;
+ const year=$('year').value;
+ const caption=$('caption').value;
+ const line=(x,y,w,h,color=bd)=>{ctx.fillStyle=color;ctx.fillRect(x,y,w,h)};
+ const border=(x,y,w,h,color=bd,n=8)=>{
+ ctx.strokeStyle=color;ctx.lineWidth=n;ctx.strokeRect(x,y,w,h);
  };
- localStorage.setItem('pplbProject',JSON.stringify(project));
- alert('Project saved successfully!');
- }catch(e){alert('Project save failed')}
-}
 
-function loadProject(){
- try{
- const p=JSON.parse(localStorage.getItem('pplbProject'));
- if(!p)return alert('No saved project found');
- Object.keys(p).forEach(k=>{
- if($(k))$(k).value=p[k];
+ if(mode===0){
+ photo(50,50,980,800);
+ text(place,50,960,68,fg);
+ brand(fg);
+ }
+ if(mode===1){
+ line(0,0,350,1080,'#e8e1d3');
+ photo(x,y,w,h);
+ text('TRAVEL',45,160,35,'#263c30');
+ text(place,45,440,58,'#263c30');
+ text(year,45,510,34,'#263c30','normal');
+ text(caption,45,590,23,'#263c30','normal');
+ brand(fg);
+ }
+ if(mode===2){
+ photo(0,0,1080,1080);
+ let g=ctx.createLinearGradient(0,450,0,1080);
+ g.addColorStop(0,'transparent');g.addColorStop(1,'#000e');
+ line(0,0,1080,1080,'#0001');
+ ctx.fillStyle=g;ctx.fillRect(0,0,1080,1080);
+ text('PPLB TRAVEL',55,100,34,'white');
+ text(place,55,850,90,'white');
+ text(year+'  ·  '+serial,60,920,32,'white');
+ brand('white');
+ }
+ if(mode===3){
+ photo(0,0,650,1080);
+ line(650,0,430,1080,bg);
+ text('TRAVEL',700,200,35,fg);
+ text(place,700,450,62,fg);
+ text(year,700,520,35,fg);
+ brand(fg);
+ }
+ if(mode===4){
+ photo(x,y,w,h);
+ border(25,25,1030,900,'#25e26c',12);
+ border(45,45,990,860,'#ffffff',3);
+ text(place,50,970,70,fg);
+ brand(fg);
+ }
+ if(mode===5){
+ line(0,0,1080,1080,'#eadcc1');
+ border(25,25,1030,1030,'#80643f',12);
+ text('GREETINGS FROM PPLB',70,110,32,'#765532');
+ photo(x,y,w,h);
+ text(place,75,950,65,'#624a30');
+ brand('#624a30');
+ }
+ if(mode===6){
+ photo(0,0,1080,1080);
+ line(0,0,1080,1080,'#0002');
+ text('THE PPLB JOURNAL',60,90,35,'white');
+ text(place,60,230,100,'white');
+ text('TRAVEL • EXPLORE • LIVE',60,290,28,'white','normal');
+ brand('white');
+ }
+ if(mode===7){
+ line(0,0,1080,1080,'#f1eee6');
+ text('PPLB — TRAVEL STORIES',70,90,28,'#283e32');
+ photo(x,y,w,h);
+ text(place,80,950,66,'#283e32');
+ brand('#283e32');
+ }
+ if(mode===8){
+ photo(x,y,w,h,true);
+ ctx.strokeStyle=bd;ctx.lineWidth=15;
+ ctx.beginPath();ctx.arc(540,420,365,0,Math.PI*2);ctx.stroke();
+ text(place,540,900,72,fg,'bold','center');
+ brand(fg);
+ }
+ if(mode===9){
+ photo(x,y,w,h);
+ line(0,0,170,1080,bg);
+ ctx.save();ctx.translate(85,750);ctx.rotate(-Math.PI/2);
+ text(place,0,0,55,fg,'bold','center');ctx.restore();
+ text(year,205,1000,35,fg);
+ brand(fg);
+ }
+ if(mode===10){
+ line(0,0,1080,1080,'#e9e1d2');
+ text('MY TRAVEL JOURNAL',70,85,30,'#38513f');
+ photo(x,y,w,h);
+ text(place,80,870,65,'#38513f');
+ text(caption,80,920,25,'#38513f','normal');
+ brand('#38513f');
+ }
+ if(mode===11){
+ line(0,0,1080,1080,'#101514');
+ photo(x,y,w,h);
+ border(25,25,1030,930,'#c4a45c',8);
+ text('PPLB FILM',70,90,30,'white');
+ text(place,70,960,60,'white');
+ brand('white');
+ }
+ if(mode===12){
+ line(0,0,1080,1080,'#201b16');
+ photo(x,y,w,h);
+ border(25,25,1030,900,'#d7b46b',9);
+ text(place,50,970,65,'#f1d99c');
+ brand('#f1d99c');
+ }
+ if(mode===13){
+ photo(x,y,w,h);
+ border(20,20,1040,900,'#1bdc54',12);
+ border(43,43,994,855,'#d4ffdc',3);
+ text(place,50,970,70,fg);
+ brand(fg);
+ }
+ if(mode===14){
+ line(0,0,1080,1080,'#dedbd0');
+ line(75,40,930,970,'#ffffff');
+ photo(x,y,w,h);
+ text(place,130,940,60,'#273a30');
+ brand('#273a30');
+ }
+ if(mode===15){
+ photo(x,y,w,h);
+ line(55,770,460,260,'#f4f1e8');
+ line(535,770,490,260,'#e0e8dd');
+ text(place,85,865,55,'#263b30');
+ text(year,85,920,28,'#263b30');
+ text('EXPLORE BANGLADESH',565,850,29,'#263b30');
+ brand(fg);
+ }
+ if(mode===16){
+ line(0,0,1080,1080,'#14171b');
+ photo(0,0,1080,800);
+ text('PPLB EXCLUSIVE',60,880,28,'#d9b96e');
+ text(place,60,960,70,'white');
+ brand('#d9b96e');
+ }
+ if(mode===17){
+ line(0,0,1080,1080,'#dfe8d6');
+ text('🌿 NATURE DIARY',70,95,35,'#294a35');
+ photo(x,y,w,h);
+ text(place,80,920,64,'#294a35');
+ brand('#294a35');
+ }
+ if(mode===18){
+ line(0,0,1080,1080,'#e6dfcf');
+ line(80,35,920,980,'#fff');
+ photo(x,y,w,h);
+ text(place,150,930,55,'#35332b');
+ text(year,150,970,24,'#35332b','normal');
+ brand('#35332b');
+ }
+ if(mode===19){
+ photo(x,y,w,h);
+ line(0,0,300,1080,bg);
+ text('PPLB',30,100,42,fg);
+ ctx.save();ctx.translate(145,720);ctx.rotate(-Math.PI/2);
+ text(place,0,0,54,fg,'bold','center');ctx.restore();
+ brand(fg);
+ }
+ if(mode===20){
+ line(0,0,1080,1080,'#191a18');
+ photo(x,y,w,h);
+ border(20,20,1040,890,'#c6a45d',5);
+ text('CINEMATIC EDITION',55,90,29,'#e8d29d');
+ text(place,55,970,68,'white');
+ brand('#e8d29d');
+ }
+ if(mode===21){
+ photo(x,y,w,h);
+ line(0,900,1080,180,'#0d3024');
+ text('FOREST EXPLORER',50,950,30,'#b9e6c7');
+ text(place,50,1030,60,'white');
+ brand('white');
+ }
+ if(mode===22){
+ line(0,0,1080,1080,'#d9d0bd');
+ border(35,35,1010,1010,'#8e7959',7);
+ text('PPLB PASSPORT',75,105,34,'#544735');
+ photo(x,y,w,h);
+ text(place,150,900,60,'#544735');
+ text('DESTINATION · BANGLADESH',150,950,24,'#544735');
+ brand('#544735');
+ }
+ if(mode===23){
+ photo(x,y,w,h);
+ border(25,25,1030,900,'#c6a45d',7);
+ text('PPLB SIGNATURE',55,90,28,'white');
+ text(place,55,960,72,'white');
+ brand('#f4d89a');
+ }
+
+ /* Always-fixed brand and travel information */
+ ctx.fillStyle=fg;
+ ctx.font='bold 26px Arial';
+ ctx.textAlign='left';
+ ctx.fillText(serial+'  ·  '+year,52,1050);
+ if(mode!==0&&mode!==1&&mode!==2&&mode!==3&&mode!==5&&mode!==7&&mode!==8&&mode!==9&&mode!==10&&mode!==11&&mode!==12&&mode!==13&&mode!==14&&mode!==15&&mode!==16&&mode!==17&&mode!==18&&mode!==19&&mode!==20&&mode!==21&&mode!==22&&mode!==23){
+ brand(fg);
+ }
+ 
+ objects.forEach(o=>{
+ ctx.save();
+ if(o.type==='text'){
+ text(o.value,o.x,o.y,o.size,o.color);
+ }else{
+ text(o.value,o.x,o.y,o.size,'white');
+ }
+ ctx.restore();
  });
- selected=p.selected||0;
- draw();renderGallery();
- }catch(e){alert('Could not load project')}
 }
 
-function renderGallery(){
+/* HISTORY */
+function snapshot(){
+ history.push(JSON.stringify({
+ angle,flipped,objects,selected,
+ values:['place','serial','year','caption','zoom','posX','posY',
+ 'brightness','contrast','saturation','filter','frameColor','bg','fg','frame']
+ .map(id=>$(id).value)
+ }));
+ if(history.length>25)history.shift();
+ future=[];
+}
+function restore(s){
+ const v=JSON.parse(s);
+ angle=v.angle;flipped=v.flipped;objects=v.objects;selected=v.selected;
+ ['place','serial','year','caption','zoom','posX','posY',
+ 'brightness','contrast','saturation','filter','frameColor','bg','fg','frame']
+ .forEach((id,i)=>$(id).value=v.values[i]);
+ draw();gallery();
+}
+function undo(){
+ if(!history.length)return;
+ future.push(JSON.stringify({angle,flipped,objects,selected,
+ values:['place','serial','year','caption','zoom','posX','posY','brightness','contrast','saturation','filter','frameColor','bg','fg','frame'].map(id=>$(id).value)}));
+ restore(history.pop());
+}
+function redo(){
+ if(!future.length)return;
+ snapshot();restore(future.pop());
+}
+
+function rotate(n){snapshot();angle=(angle+n+360)%360;draw()}
+function flip(){snapshot();flipped=!flipped;draw()}
+function resetPhoto(){
+ snapshot();angle=0;flipped=false;
+ $('zoom').value=100;$('posX').value=0;$('posY').value=0;
+ $('brightness').value=100;$('contrast').value=100;
+ $('saturation').value=100;$('filter').value='none';draw();
+}
+function addText(){
+ let v=$('extraText').value.trim();if(!v)return;
+ snapshot();
+ objects.push({type:'text',value:v,x:180,y:650,
+ size:+$('extraSize').value,color:$('extraColor').value});
+ $('extraText').value='';draw();
+}
+function addSticker(v){
+ snapshot();objects.push({type:'sticker',value:v,x:540,y:550,size:75});draw();
+}
+
+/* DRAG TEXT AND STICKERS */
+function pointerPos(e){
+ const r=c.getBoundingClientRect();
+ return {x:(e.clientX-r.left)*1080/r.width,
+ y:(e.clientY-r.top)*1080/r.height};
+}
+c.addEventListener('pointerdown',e=>{
+ const p=pointerPos(e);
+ for(let i=objects.length-1;i>=0;i--){
+ if(Math.abs(objects[i].x-p.x)<160&&Math.abs(objects[i].y-p.y)<100){
+ dragging=i;snapshot();c.setPointerCapture(e.pointerId);break;
+ }
+ }
+});
+c.addEventListener('pointermove',e=>{
+ if(dragging<0)return;
+ const p=pointerPos(e);
+ objects[dragging].x=p.x;objects[dragging].y=p.y;draw();
+});
+c.addEventListener('pointerup',()=>dragging=-1);
+c.addEventListener('pointercancel',()=>dragging=-1);
+
+/* PHOTO */
+$('photo').onchange=e=>{
+ const f=e.target.files[0];if(!f)return;
+ if(!f.type.startsWith('image/'))return alert('সঠিক ছবি নির্বাচন করুন');
+ const reader=new FileReader();
+ reader.onload=()=>{
+ const image=new Image();
+ image.onload=()=>{snapshot();img=image;angle=0;flipped=false;draw()};
+ image.src=reader.result;
+ };
+ reader.readAsDataURL(f);
+};
+
+/* DESIGN GALLERY */
+function gallery(){
  const g=$('gallery');g.innerHTML='';
- const term=$('search').value.toLowerCase();
- templates.filter(d=>
- (layouts[d.layout]+' '+d.id).toLowerCase().includes(term)
- ).slice(0,pageSize).forEach(d=>{
+ let term=$('search').value.toLowerCase();
+ let cat=$('category').value;
+ designs.forEach((d,i)=>{
+ if(cat!=='all'&&d.cat!==cat)return;
+ if(!d.name.toLowerCase().includes(term))return;
  const b=document.createElement('button');
- b.className='template'+(selected===d.id-1?' active':'');
- b.innerHTML=`<div class="thumb" style="background:${palettes[d.palette][0]}">
- <div style="position:absolute;inset:8%;border:3px solid ${palettes[d.palette][2]}"></div>
- <div style="position:absolute;bottom:10%;left:10%;font-weight:bold;color:${palettes[d.palette][1]}">PPLB</div>
- </div><b>${layouts[d.layout]}</b><small>#${d.id}</small>`;
+ b.className='design'+(selected===i?' active':'');
+ const mini=document.createElement('canvas');
+ mini.width=160;mini.height=160;
+ const m=mini.getContext('2d');
+ const color=palettes[i%10];
+ m.fillStyle=color[0];m.fillRect(0,0,160,160);
+ let mode=d.mode;
+ let [x,y,w,h]=d.p;
+ let sx=x/1080*160,sy=y/1080*160;
+ let sw=w/1080*160,sh=h/1080*160;
+ m.fillStyle='#8aa99a';
+ if(mode===8){m.beginPath();m.arc(80,62,51,0,7);m.fill()}
+ else m.fillRect(sx,sy,sw,sh);
+ m.strokeStyle=color[2];m.lineWidth=3;m.strokeRect(4,4,152,152);
+ m.fillStyle=color[1];m.font='bold 12px Arial';
+ m.fillText('PPLB',100,145);
+ b.appendChild(mini);
+ const title=document.createElement('strong');
+ title.textContent=d.name;b.appendChild(title);
+ const small=document.createElement('small');
+ small.textContent='Design '+String(i+1).padStart(2,'0');
+ b.appendChild(small);
  b.onclick=()=>{
- selected=d.id-1;
- $('bg').value=palettes[d.palette][0];
- $('fg').value=palettes[d.palette][1];
- $('border').value=palettes[d.palette][2];
- draw();renderGallery();
+ snapshot();selected=i;
+ $('bg').value=color[0];$('fg').value=color[1];$('frameColor').value=color[2];
+ draw();gallery();
  };
  g.appendChild(b);
  });
 }
-function more(){pageSize+=50;renderGallery()}
-$('search').oninput=()=>{pageSize=50;renderGallery()};
+$('category').onchange=gallery;
+$('search').oninput=gallery;
 
-['place','serial','year','caption','bg','fg','border',
-'borderSize','zoom','brightness','contrast','saturation']
+/* LIVE SETTINGS */
+['place','serial','year','caption','zoom','posX','posY','brightness',
+'contrast','saturation','filter','frameColor','bg','fg','frame']
 .forEach(id=>$(id).addEventListener('input',draw));
 
-draw();
-renderGallery();
+function download(type,ext){
+ draw();
+ const a=document.createElement('a');
+ a.download='PPLB-'+Date.now()+'.'+ext;
+ a.href=c.toDataURL(type,.95);a.click();
+}
+
+/* SAVE PROJECT INCLUDING PHOTO */
+function save(){
+ try{
+ const data={
+ settings:{},
+ angle,flipped,objects,selected,
+ photo:img?img.src:null
+ };
+ ['place','serial','year','caption','zoom','posX','posY',
+ 'brightness','contrast','saturation','filter','frameColor','bg','fg','frame']
+ .forEach(id=>data.settings[id]=$(id).value);
+ localStorage.setItem('PPLB_PROJECT',JSON.stringify(data));
+ alert('Project Saved Successfully!');
+ }catch(e){alert('ছবি বড় হলে ব্রাউজারের Storage সীমা অতিক্রম করতে পারে।')}
+}
+function load(){
+ try{
+ const d=JSON.parse(localStorage.getItem('PPLB_PROJECT'));
+ if(!d)return alert('কোনো Saved Project পাওয়া যায়নি');
+ Object.keys(d.settings).forEach(id=>$(id).value=d.settings[id]);
+ angle=d.angle;flipped=d.flipped;objects=d.objects;selected=d.selected;
+ if(d.photo){
+ const im=new Image();
+ im.onload=()=>{img=im;draw();gallery()};
+ im.src=d.photo;
+ }else{img=null;draw();gallery()}
+ }catch(e){alert('Project Load করা যায়নি')}
+}
+
+/* START */
+draw();gallery();
 </script>
 </body>
 </html>
